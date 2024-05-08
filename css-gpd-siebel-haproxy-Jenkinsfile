@@ -24,7 +24,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application CSSNCW"								
-								def serverDetails = readJSON file: 'Patching_cycle_13/data/CSS.json'
+								def serverDetails = readJSON file: 'CSS.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def css_servers = serverDetails.CSS_NCW_SERVERS
 								def backend = serverDetails.CSS_BACKENDS
@@ -77,7 +77,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application GPDNCW"								
-								def serverDetails = readJSON file: 'Patching_cycle_13/data/GPD.json'
+								def serverDetails = readJSON file: 'GPD.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def gpd_servers = serverDetails.GPD_NCW_SERVERS
 								def backend = serverDetails.GPD_BACKEND
@@ -131,7 +131,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application SiebelNCW"
-								def serverDetails = readJSON file: 'Patching_cycle_13/data/Siebel.json'
+								def serverDetails = readJSON file: 'Siebel.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def siebel_servers = serverDetails.SIEBEL_NCW_SERVERS
 								def siebel_backend= serverDetails.SIEBEL_NCW_BACKEND
@@ -180,7 +180,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application PhantomNCW"
-								def serverDetails = readJSON file: 'Patching_cycle_13/data/Phantom.json'
+								def serverDetails = readJSON file: 'Phantom.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def phantom_servers = serverDetails.PHANTOM_NCW_SERVERS
 								def phantom_backend =serverDetails.PHANTOM_BACKEND
@@ -233,7 +233,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application PhantomUINCW"
-								def serverDetails = readJSON file: 'Patching_cycle_13/data/Phantom.json'
+								def serverDetails = readJSON file: 'Phantom.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def phantom_ui_servers = serverDetails.UI_NCW_SERVERS
 								def phantom_ui_backend =serverDetails.UI_NCW_BACKEND
@@ -285,9 +285,9 @@ pipeline {
 					}
 					steps {
 						script{
-							//try {
+							try {
 								println "Performing "+ action +" on application SOMDR"								
-								def serverDetails = readJSON file: 'Patching_cycle_13/data/SOM.json'
+								def serverDetails = readJSON file: 'SOM.json'
 								println "read success"
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def som_servers = serverDetails.SOM_NCW_SERVERS
@@ -384,4 +384,5 @@ def performActionOnSOM(Object haproxyservers, Object backendWithPort, Object ser
 		}
 	}
 	return result
-}	
+}
+
