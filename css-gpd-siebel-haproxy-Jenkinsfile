@@ -13,14 +13,6 @@ pipeline {
 
 		stage('Parallel execution') {
 			parallel {
-				stage('Job parameters'){
-				steps {
-						script{
-							println "application : " + application
-							println "Action : " + action
-						}
-					}	
-				}
 				stage('CSS') {
 					when {
 						expression {
