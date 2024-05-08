@@ -303,7 +303,7 @@ pipeline {
 								
 
 								if(application =='SOMDR' && haproxyFromParamArray =='ALL' && backendFromParamArray =='ALL' && backendServersFromParamArray =='ALL') {
-								def SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )				
+								SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )				
 								publishResults = publishResults + "SOMDR: " + SOMResult+ "\n"
 								}	
 								else 
