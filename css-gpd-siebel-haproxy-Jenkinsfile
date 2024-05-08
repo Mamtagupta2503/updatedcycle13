@@ -301,11 +301,11 @@ pipeline {
 								def SOMResult
 								//def backendWithPortFromParamArray = Arrays.asList((backendWithPortFromParam).split(","))
 								println "haproxyFromParamArray"+haproxyFromParamArray
-								println "backendServersFromParamArray"+backendServersFromParamArray
+								println "backendFromParamArray"+backendFromParamArray
 								println "backendServersFromParamArray"+backendServersFromParamArray
 								
 
-								if(application =='SOMDR' && haproxyFromParamArray =='ALL' && backendFromParamArray =='ALL' && backendServersFromParamArray =='ALL') {
+								if(application =='SOMDR' && haproxyFromParamArray.contains("ALL") && backendFromParamArray.contains("ALL") && backendServersFromParamArray.contains("ALL")) {
 								SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )				
 								publishResults = publishResults + "SOMDR: " + SOMResult+ "\n"
 								}	
