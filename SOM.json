@@ -1,0 +1,42 @@
+{
+    "HAPROXY_SERVERS": [
+        "api-haproxy1-prod.ncw.webapps.rr.com",
+        "api-haproxy2-prod.ncw.webapps.rr.com",
+        "api-haproxy1-prod.nce.webapps.rr.com",
+        "api-haproxy2-prod.nce.webapps.rr.com"
+    ],
+    "SOM_NCW_SERVERS": [
+        "somdr0001",
+        "somdr0002",
+        "somdr0003",
+        "somdr0004"
+    ],
+    "BACKEND_PORT": {
+		"www-som-accountservice-ssl": [8149,8150,8151],
+		"www-som-affiliate-service-ssl":[8130],
+		"www-som-authenticationservice-ssl":[8136],
+		"www-som-billingservice-ssl": [8112,8113],
+		"www-som-configservice-ssl": [8128,8129],
+		"www-som-coreautomationservice-ssl":[8155,8156,8157],
+		"www-som-createlocationservice-ssl": [8132],
+		"www-som-csgleadautomationservice-ssl": [8155,8156,8157],
+		"www-som-customerservice-ssl": [8114,8115],
+		"www-som-json-ssl": [8110,8111],
+		"www-som-jvm": [7110],
+		"www-som-leadhistoryservice-ssl": [8120,8121],
+		"www-som-mdaprocessorservice-ssl": [8141,8142,8143],
+		"www-som-mobileautomationservice-ssl":[8152],
+		"www-som-mobiletokenservice-ssl":[8154],
+		"www-som-orderdetailsservice-ssl": [8122,8123],
+		"www-som-productservice-ssl": [8124,8125],
+		"www-som-programdetailsservice-ssl": [8138],
+		"www-som-schedulingservice-ssl": [8126],
+		"www-som-searchorderservice-ssl": [8148],
+		"www-som-singleswagger-ssl": [8140],
+		"www-som-submitleadservice-ssl": [8159,8160,8161],
+		"www-som-tmsleadmgmtservice-ssl": [8144],
+		"www-som-ui-ssl": [7210],
+		"www-som-uiapp-ssl": [8210]		
+    },	
+	"SOCKFILE": "/data/apps/haproxy/haproxy_sock"
+}
