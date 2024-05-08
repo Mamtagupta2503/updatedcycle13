@@ -13,16 +13,16 @@ pipeline {
 
 		stage('Parallel execution') {
 			parallel {
-				stage('CSS') {
+				stage('CSSNCW') {
 					when {
 						expression {
-						'CSS' in application||'ALL' in application
+						'CSSNCW' in application||'ALL' in application
 						}
 					}
 					steps {
 						script{
 							try {
-								println "Performing "+ action +" on application CSS"								
+								println "Performing "+ action +" on application CSSNCW"								
 								def serverDetails = readJSON file: 'CSS.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def css_servers = serverDetails.CSS_NCW_SERVERS
@@ -34,7 +34,7 @@ pipeline {
 								def haproxyFromParamArray =Arrays.asList((haproxyFromParam).split(","))
 								def server
 								
-								if(application =='CSS') {
+								if(application =='CSSNCW') {
 									HAProxyServers = haproxyFromParamArray
 									css_servers = backendServersFromParamArray
 									backend = backendFromParamArray
@@ -55,10 +55,10 @@ pipeline {
 								{
 									result = performAction(HAProxyServers, backend, css_servers, 'maint', sockFileLoc )
 								}	
-								publishResults = publishResults + "CSS " + result+ "\n"									
+								publishResults = publishResults + "CSSNCW " + result+ "\n"									
 							}catch(Exception e) {
 								result ='Failed'
-								publishResults = publishResults + "CSS: " + result+ "\n"
+								publishResults = publishResults + "CSSNCW: " + result+ "\n"
 								catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 								sh "exit 1"
 								}
@@ -66,16 +66,16 @@ pipeline {
 						}
 					}      
 				}
-				stage('GPD') {
+				stage('GPDNCW') {
 					when {
 						expression {
-						'GPD' in application||'ALL' in application
+						'GPDNCW' in application||'ALL' in application
 						}
 					}
 					steps {
 						script{
 							try {
-								println "Performing "+ action +" on application GPD"								
+								println "Performing "+ action +" on application GPDNCW"								
 								def serverDetails = readJSON file: 'GPD.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def gpd_servers = serverDetails.GPD_NCW_SERVERS
@@ -86,7 +86,7 @@ pipeline {
 								def haproxyFromParamArray =Arrays.asList((haproxyFromParam).split(","))
 								def result =''
 
-								if(application =='GPD'){
+								if(application =='GPDNCW'){
 									HAProxyServers = haproxyFromParamArray
 									gpd_servers = backendServersFromParamArray
 									backend = backendFromParamArray
@@ -108,11 +108,11 @@ pipeline {
 								{
 									result =performAction(HAProxyServers, backend, gpd_server, 'maint', sockFileLoc )
 								}					
-								publishResults = publishResults + "GPD: " + result+ "\n"
+								publishResults = publishResults + "GPDNCW: " + result+ "\n"
 								
 							}catch(Exception e) {
 								result ='Failed'
-								publishResults = publishResults + "GPD: " + result+ "\n"
+								publishResults = publishResults + "GPDNCW: " + result+ "\n"
 								catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 								sh "exit 1"
 								}
@@ -120,16 +120,16 @@ pipeline {
 						}
 					}      
 				}
-				stage('Siebel') {
+				stage('SiebelNCW') {
 					when {
 						expression {
-						'Siebel' in application||'ALL' in application
+						'SiebelNCW' in application||'ALL' in application
 						}
 					}
 					steps {
 						script{
 							try {
-								println "Performing "+ action +" on application Siebel"
+								println "Performing "+ action +" on application SiebelNCW"
 								def serverDetails = readJSON file: 'Siebel.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def siebel_servers = serverDetails.SIEBEL_NCW_SERVERS
@@ -140,7 +140,7 @@ pipeline {
 								def haproxyFromParamArray =Arrays.asList((haproxyFromParam).split(","))
 								def result
 
-								if(application =='Siebel'){
+								if(application =='SiebelNCW'){
 									HAProxyServers = haproxyFromParamArray
 									siebel_servers = backendServersFromParamArray
 									siebel_backend = backendFromParamArray
@@ -157,11 +157,11 @@ pipeline {
 										result =performAction(HAProxyServers, siebel_backend, siebel_servers, 'ready', sockFileLoc )
 									}	
 									
-								publishResults = publishResults + "Siebel: " + result+ "\n"
+								publishResults = publishResults + "SiebelNCW: " + result+ "\n"
 								
 							}catch(Exception e) {
 								result ='Failed'
-								publishResults = publishResults + "Siebel: " + result+ "\n"
+								publishResults = publishResults + "SiebelNCW: " + result+ "\n"
 								catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 									sh "exit 1"
 								}
@@ -169,20 +169,20 @@ pipeline {
 						}      
 					}
 				}
-				stage('Phantom') {
+				stage('PhantomNCW') {
 					when {
 						expression {
-						'Phantom' in application||'ALL' in application
+						'PhantomNCW' in application||'ALL' in application
 						}
 					}
 					steps {
 						script{
 							try {
-								println "Performing "+ action +" on application Phantom"
+								println "Performing "+ action +" on application PhantomNCW"
 								def serverDetails = readJSON file: 'Phantom.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def phantom_servers = serverDetails.PHANTOM_NCW_SERVERS
-								def phantomBackend =serverDetails.PHANTOM_BACKEND
+								def phantom_backend =serverDetails.PHANTOM_BACKEND
 								def sockFileLoc = serverDetails.SOCKFILE
 								def backendFromParamArray =Arrays.asList((backendFromParam).split(","))
 								def backendServersFromParamArray = Arrays.asList((backendServersFromParam).split(","))
@@ -203,18 +203,18 @@ pipeline {
 								
 								if(action=='Pre-Patching'||action=='disable')
 									{	
-										PhantomResult =performAction(HAProxyServers, phantomBackend, phantom_servers, 'disable', sockFileLoc )
+										PhantomResult =performAction(HAProxyServers, phantom_backend, phantom_servers, 'disable', sockFileLoc )
 									}
 									else if(action=='Post-Patching'||action=='enable')
 									{
-										PhantomResult =performAction(HAProxyServers, phantomBackend, phantom_servers, 'enable', sockFileLoc )
+										PhantomResult =performAction(HAProxyServers, phantom_backend, phantom_servers, 'enable', sockFileLoc )
 									}	
 									
-								publishResults = publishResults + "Phantom: " + PhantomResult+ "\n"
+								publishResults = publishResults + "PhantomNCW: " + PhantomResult+ "\n"
 								
 							}catch(Exception e) {
 								PhantomResult ='Failed'
-								publishResults = publishResults + "Phantom: " + PhantomResult+ "\n"
+								publishResults = publishResults + "PhantomNCW: " + PhantomResult+ "\n"
 								catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 									sh "exit 1"
 								}
@@ -222,16 +222,16 @@ pipeline {
 						}      
 					}
 				}
-				stage('Phantom UI') {
+				stage('Phantom UI NCW') {
 					when {
 						expression {
-						'PhantomUI' in application||'ALL' in application
+						'PhantomUINCW' in application||'ALL' in application
 						}
 					}
 					steps {
 						script{
 							try {
-								println "Performing "+ action +" on application PhantomUI"
+								println "Performing "+ action +" on application PhantomUINCW"
 								def serverDetails = readJSON file: 'Phantom.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def phantom_ui_servers = serverDetails.UI_NCW_SERVERS
@@ -264,11 +264,11 @@ pipeline {
 										UIResult =performAction(HAProxyServers, phantom_ui_backend, phantom_ui_servers, 'enable', sockFileLoc )
 									}	
 									
-								publishResults = publishResults + "Phantom UI: " + UIResult+ "\n"
+								publishResults = publishResults + "Phantom UI NCW: " + UIResult+ "\n"
 								
 							}catch(Exception e) {
 								UIResult ='Failed'
-								publishResults = publishResults + "Phantom: " + UIResult+ "\n"
+								publishResults = publishResults + "Phantom UI NCW: " + UIResult+ "\n"
 								catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 									sh "exit 1"
 								}
