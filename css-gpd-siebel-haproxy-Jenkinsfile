@@ -31,7 +31,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application CSS"								
-								def serverDetails = readJSON file: 'CSS.json'
+								def serverDetails = readJSON file: 'Patching_cycle_13/data/CSS.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def css_servers = serverDetails.CSS_NCW_SERVERS
 								def backend = serverDetails.CSS_BACKENDS
@@ -84,9 +84,9 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application GPD"								
-								def serverDetails = readJSON file: 'GPD.json'
+								def serverDetails = readJSON file: 'Patching_cycle_13/data/GPD.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
-								def gpd_servers = serverDetails.GPD_NCE_SERVERS
+								def gpd_servers = serverDetails.GPD_NCW_SERVERS
 								def backend = serverDetails.GPD_BACKEND
 								def sockFileLoc = serverDetails.SOCKFILE
 								def backendFromParamArray =Arrays.asList((backendFromParam).split(","))
@@ -138,33 +138,31 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application Siebel"
-								def serverDetails = readJSON file: 'Siebel.json'
+								def serverDetails = readJSON file: 'Patching_cycle_13/data/Siebel.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def siebel_servers = serverDetails.SIEBEL_NCW_SERVERS
-								def ncebackend= serverDetails.SIEBEL_NCE_BACKEND
-								def ncwbackend= serverDetails.SIEBEL_NCW_BACKEND
+								def siebel_backend= serverDetails.SIEBEL_NCW_BACKEND
 								def sockFileLoc = serverDetails.SOCKFILE
 								def backendFromParamArray =Arrays.asList((backendFromParam).split(","))
 								def backendServersFromParamArray = Arrays.asList((backendServersFromParam).split(","))
 								def haproxyFromParamArray =Arrays.asList((haproxyFromParam).split(","))
-								def backend
 								def result
 
-								if(application =='ALL'){
+								if(application =='Siebel'){
 									HAProxyServers = haproxyFromParamArray
 									siebel_servers = backendServersFromParamArray
-									backend = backendFromParamArray
+									siebel_backend = backendFromParamArray
 									println "HAProxy server selected from parameter: " + HAProxyServers
-									println "backend selected from parameter: " + backend
+									println "backend selected from parameter: " + siebel_backend
 									println "backend server selected from parameter: " + siebel_servers
 								}								
 								if(action=='Pre-Patching'||action=='maint')
 									{	
-										result =performAction(HAProxyServers, backend, siebel_servers, 'maint', sockFileLoc )
+										result =performAction(HAProxyServers, siebel_backend, siebel_servers, 'maint', sockFileLoc )
 									}
 									else if(action=='Post-Patching'||action=='ready')
 									{
-										result =performAction(HAProxyServers, backend, siebel_servers, 'ready', sockFileLoc )
+										result =performAction(HAProxyServers, siebel_backend, siebel_servers, 'ready', sockFileLoc )
 									}	
 									
 								publishResults = publishResults + "Siebel: " + result+ "\n"
@@ -189,7 +187,7 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application Phantom"
-								def serverDetails = readJSON file: 'Phantom.json'
+								def serverDetails = readJSON file: 'Patching_cycle_13/data/Phantom.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
 								def phantom_servers = serverDetails.PHANTOM_NCW_SERVERS
 								def phantomBackend =serverDetails.PHANTOM_BACKEND
@@ -242,9 +240,9 @@ pipeline {
 						script{
 							try {
 								println "Performing "+ action +" on application PhantomUI"
-								def serverDetails = readJSON file: 'Phantom.json'
+								def serverDetails = readJSON file: 'Patching_cycle_13/data/Phantom.json'
 								def HAProxyServers = serverDetails.HAPROXY_SERVERS 
-								def phantom_ui_server = serverDetails.UI_NCW_SERVERS
+								def phantom_ui_servers = serverDetails.UI_NCW_SERVERS
 								def phantom_ui_backend =serverDetails.UI_NCW_BACKEND
 								def sockFileLoc = serverDetails.SOCKFILE
 								def backendFromParamArray =Arrays.asList((backendFromParam).split(","))
