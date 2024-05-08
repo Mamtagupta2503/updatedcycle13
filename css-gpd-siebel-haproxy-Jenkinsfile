@@ -300,6 +300,9 @@ pipeline {
 								
 								def SOMResult
 								//def backendWithPortFromParamArray = Arrays.asList((backendWithPortFromParam).split(","))
+								println "haproxyFromParamArray"+haproxyFromParamArray
+								println "backendServersFromParamArray"+backendServersFromParamArray
+								println "backendServersFromParamArray"+backendServersFromParamArray
 								
 
 								if(application =='SOMDR' && haproxyFromParamArray =='ALL' && backendFromParamArray =='ALL' && backendServersFromParamArray =='ALL') {
