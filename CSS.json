@@ -1,0 +1,30 @@
+{
+	"HAPROXY_SERVERS": [
+		"142.136.81.131",
+		"142.136.81.130",
+		"142.136.168.38",
+		"142.136.168.37"
+	],
+	"CSS_NCW_SERVERS": [
+		"prod_vm0rncsswla0001_ncw_7130",
+		"prod_vm0rncsswla0001_ncw_7131",
+		"prod_vm0rncsswla0002_ncw_7130",
+		"prod_vm0rncsswla0002_ncw_7131",
+		"prod_vm0rncsswla0003_ncw_7130",
+		"prod_vm0rncsswla0003_ncw_7131",
+		"prod_vm0rncsswla0004_ncw_7130",
+		"prod_vm0rncsswla0004_ncw_7131",
+		"prod_vm0rncsswla0005_ncw_7130",
+		"prod_vm0rncsswla0005_ncw_7131",
+		"prod_vm0rncsswla0008_ncw_7130",
+		"prod_vm0rncsswla0008_ncw_7131"
+	],
+
+	"CSS_BACKENDS": [
+		"www-css-iu-ssl",
+		"www-css-ssl",
+		"www-css-ssl2"
+	],
+	"SOCKFILE": "/data/apps/haproxy/haproxy_sock"
+}
+

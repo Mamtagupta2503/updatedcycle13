@@ -1,0 +1,17 @@
+{
+	"HAPROXY_SERVERS": [
+		"142.136.81.131",
+		"142.136.81.130",
+		"142.136.168.38",
+		"142.136.168.37"
+	],
+	"SIEBEL_NCW_SERVERS": [
+		"prod_vm0pwsbldrw0001",
+		"prod_vm0pwsbldrw0002"
+	],
+
+	"SIEBEL_NCW_BACKEND": [
+		"www-siebel-ncw-ssl"
+	],
+	"SOCKFILE": "/data/apps/haproxy/haproxy_sock"
+}
