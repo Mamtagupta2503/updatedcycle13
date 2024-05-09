@@ -393,12 +393,8 @@ def performActionOnSOM(Object haproxyservers, Object backendWithPort, Object ser
 }
 def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object servers, Object port, String action, Object sockfileloc ){
 	def result ='Success'
-	println "Inside performActionOnSOMFromParam method"
 	def backend_server
 	ArrayList backend_server_list = new ArrayList(); 
-
-	//def backend
-	//def portarray
 	println "haproxyservers"+ haproxyservers
 	println "backend"+backend
 	println "servers"+servers
@@ -408,7 +404,7 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 	{
 		for(p in port){
 			backend_server =server + '-' +p
-			println backend_server
+			//println backend_server
 			backend_server_list.add(backend_server)
 			//println "+" backend_server_list
 			
@@ -417,22 +413,9 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 	println backend_server_list
 	for(ha in haproxyservers) {
 		def SSH_OPTION="ssh jenkins_worker@${ha} -o StrictHostKeyChecking=no"
-		
+		for(server in backend_server_list) {
+			println "$SSH_OPTION  -o LogLevel=error 'echo $action server $backend/$server | sudo socat stdio $sockfileloc'"
+		}		
 	}
-	/*for(ha in haproxyservers) {
-		def SSH_OPTION="ssh jenkins_worker@${ha} -o StrictHostKeyChecking=no"
-		for(def bwp in backendWithPort)
-		{
-			backend =bwp.key
-			for(port in bwp.value)
-				{
-					for(s in server) {
-						println "$SSH_OPTION  -o LogLevel=error 'echo $action server $backend/$s-$port | sudo socat stdio $sockfileloc'"
-					}
-				}
-			
-		}
-	}*/
 	return result
 }
-
