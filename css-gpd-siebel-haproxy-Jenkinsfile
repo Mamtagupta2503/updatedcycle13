@@ -318,7 +318,7 @@ pipeline {
 									println "backend server selected from parameter: " + server*/
 									println "som"
 									//SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )
-									performActionOnSOMFromParam(haproxyFromParamArray,backendFromParamArray,backendServersFromParamArray,port,action, sockFileLoc)	
+									performActionOnSOMFromParam(haproxyFromParamArray,backendFromParamArray,backendServersFromParamArray,portFromParamArray,action, sockFileLoc)	
 									//publishResults = publishResults + "SOMDR: " + SOMResult+ "\n"
 								}
 								//def SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )				
@@ -405,7 +405,7 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 	for(server in servers)
 	{
 		for(p in port){
-			backend_server =server + '-' +port
+			backend_server =server + '-' +p
 			println backend_server
 		}
 	}
