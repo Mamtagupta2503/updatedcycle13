@@ -394,6 +394,7 @@ def performActionOnSOM(Object haproxyservers, Object backendWithPort, Object ser
 def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object servers, Object port, String action, Object sockfileloc ){
 	def result ='Success'
 	println "Inside performActionOnSOMFromParam method"
+	def backend_server
 	//def backend
 	//def portarray
 	println "haproxyservers"+ haproxyservers
@@ -401,6 +402,17 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 	println "servers"+servers
 	println "port"+ port
 	
+	for(server in servers)
+	{
+		for(p in port){
+			backend_server =server + '-' +port
+			println backend_server
+		}
+	}
+	for(ha in haproxyservers) {
+		def SSH_OPTION="ssh jenkins_worker@${ha} -o StrictHostKeyChecking=no"
+		
+	}
 	/*for(ha in haproxyservers) {
 		def SSH_OPTION="ssh jenkins_worker@${ha} -o StrictHostKeyChecking=no"
 		for(def bwp in backendWithPort)
