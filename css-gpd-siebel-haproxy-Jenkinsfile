@@ -398,7 +398,7 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 	//def portarray
 	println "haproxyservers"+ haproxyservers
 	println "backend"+backend
-	prinltn "servers"+servers
+	println "servers"+servers
 	println "port"+ port
 	
 	/*for(ha in haproxyservers) {
