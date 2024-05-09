@@ -395,7 +395,6 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 	def result ='Success'
 	println "Inside performActionOnSOMFromParam method"
 	def backend_server
-	ArrayList backend_server_list = new ArrayList();
 	//def backend
 	//def portarray
 	println "haproxyservers"+ haproxyservers
@@ -408,12 +407,8 @@ def performActionOnSOMFromParam(Object haproxyservers, Object backend, Object se
 		for(p in port){
 			backend_server =server + '-' +p
 			println backend_server
-			backend_server_list.add(backend_server)
-			//println "+" backend_server_list
-			
 		}
 	}
-	println "backend_server_list" + backend_server_list
 	for(ha in haproxyservers) {
 		def SSH_OPTION="ssh jenkins_worker@${ha} -o StrictHostKeyChecking=no"
 		
