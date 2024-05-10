@@ -5,6 +5,12 @@
         "api-haproxy1-prod.nce.webapps.rr.com",
         "api-haproxy2-prod.nce.webapps.rr.com"
     ],
+    "SOM_NCE_SERVERS": [
+        "somprod0001",
+        "somprod0002",
+        "somprod0003",
+        "somprod0004"
+    ],
     "SOM_NCW_SERVERS": [
         "somdr0001",
         "somdr0002",
@@ -37,6 +43,12 @@
 		"www-som-tmsleadmgmtservice-ssl": [8144],
 		"www-som-ui-ssl": [7210],
 		"www-som-uiapp-ssl": [8210]		
-    },	
+    },
+	"SOM_GLOBAL_LEAD_MANAGEMENT_NCW_SERVERS": [
+        "somdr0001"
+    ],
+    "BACKEND_PORT_SOM_GLOBAL_LEAD_MANAGEMENT": {
+		"www-som-globalleadmanagementprocess-ssl": [8134]
+	},	
 	"SOCKFILE": "/data/apps/haproxy/haproxy_sock"
 }
