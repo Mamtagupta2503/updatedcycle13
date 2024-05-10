@@ -293,31 +293,25 @@ pipeline {
 								def som_servers = serverDetails.SOM_NCW_SERVERS
 								def backendWithPort = serverDetails.BACKEND_PORT
 								def sockFileLoc = serverDetails.SOCKFILE
+								def som_global_lead_mgmt_server= serverDetails.SOM_GLOBAL_LEAD_MANAGEMENT_NCW_SERVERS
+								def backendPortGlobalLeadMGMT = serverDetails.BACKEND_PORT_SOM_GLOBAL_LEAD_MANAGEMENT
 								def haproxyFromParamArray =Arrays.asList((haproxyFromParam).split(","))
 								def backendFromParamArray =Arrays.asList((backendFromParam).split(","))
 								def backendServersFromParamArray = Arrays.asList((backendServersFromParam).split(","))
 								def portFromParamArray = Arrays.asList((portFromParam).split(","))
 								
 								def SOMResult
-								//def backendWithPortFromParamArray = Arrays.asList((backendWithPortFromParam).split(","))
-								println "haproxyFromParamArray"+haproxyFromParamArray
-								println "backendFromParamArray"+backendFromParamArray
-								println "backendServersFromParamArray"+backendServersFromParamArray
+								def SOMGlobalLeadResult
 								
 
 								if(application =='SOMDR' && haproxyFromParamArray.contains("ALL") && backendFromParamArray.contains("ALL") && backendServersFromParamArray.contains("ALL")) {
-								SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )				
+								SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )
 								publishResults = publishResults + "SOMDR: " + SOMResult+ "\n"
+								SOMGlobalLeadResult = performActionOnSOM(HAProxyServers, backendPortGlobalLeadMGMT, som_global_lead_mgmt_server, action, sockFileLoc )
+								publishResults = publishResults + "SOM GLOBAL LEAD: " + SOMGlobalLeadResult+ "\n"
 								}	
 								else 
 								{	
-									/*server = backendServersFromParamArray
-									HAProxyServers = haproxyFromParamArray
-									som_servers =backendServersFromParamArray
-									println "HAProxy server selected from parameter: " + haproxyFromParamArray
-									println "backend server selected from parameter: " + server*/
-									println "som"
-									//SOMResult = performActionOnSOM(HAProxyServers, backendWithPort, som_servers, action, sockFileLoc )
 									performActionOnSOMFromParam(haproxyFromParamArray,backendFromParam,backendServersFromParamArray,portFromParamArray,action, sockFileLoc)	
 									//publishResults = publishResults + "SOMDR: " + SOMResult+ "\n"
 								}
